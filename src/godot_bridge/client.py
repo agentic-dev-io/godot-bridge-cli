@@ -43,8 +43,19 @@ class GodotClient:
         if not token and token_file:
             token_path = Path(token_file)
             if token_path.exists():
-                token = token_path.read_text().strip()
-                logger.debug(f"Loaded token from {token_file}")
+                content = token_path.read_text().strip()
+                # Handle JSON format (GodotBridge uses JSON with token field)
+                try:
+                    data = json.loads(content)
+                    token = data.get("token", content)
+                    # Also get port from JSON if available
+                    if "port" in data:
+                        ws_url = f"ws://127.0.0.1:{data['port']}"
+                    logger.debug(f"Loaded token from JSON file {token_file}")
+                except json.JSONDecodeError:
+                    # Plain text token
+                    token = content
+                    logger.debug(f"Loaded token from {token_file}")
 
         return GodotConfig(ws_url=ws_url, token=token, token_file=token_file)
 
