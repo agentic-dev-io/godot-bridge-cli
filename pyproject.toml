@@ -1,0 +1,26 @@
+[project]
+name = "godot-bridge"
+version = "1.0.0"
+description = "Unified CLI tool for Godot Editor control via WebSocket"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.12",
+    "pydantic>=2.6",
+    "loguru>=0.7",
+    "websockets>=13.0",
+    "rich>=13.0",
+]
+
+[project.scripts]
+godot-bridge = "godot_bridge.main:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/godot_bridge"]
+
+[tool.uv]
+package = true
