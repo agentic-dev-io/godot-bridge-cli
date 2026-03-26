@@ -1,5 +1,7 @@
 # Godot Bridge CLI
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N71WOHZ3)
+
 Unified CLI tool for Godot Editor control via WebSocket.
 
 ## Installation
